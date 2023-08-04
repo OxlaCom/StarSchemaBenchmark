@@ -1,0 +1,102 @@
+
+CREATE TABLE customer (
+        C_CUSTKEY       INTEGER NOT NULL,
+        C_NAME          TEXT NOT NULL,
+        C_ADDRESS       TEXT NOT NULL,
+        C_CITY          TEXT NOT NULL,
+        C_NATION        TEXT NOT NULL,
+        C_REGION        TEXT NOT NULL,
+        C_PHONE         TEXT NOT NULL,
+        C_MKTSEGMENT    TEXT NOT NULL
+);
+CREATE INDEX customer_index ON customer(C_NATION, C_REGION, C_CITY);
+ 
+CREATE TABLE lineorder (
+    LO_ORDERKEY             LONG NOT NULL,
+    LO_LINENUMBER           INTEGER NOT NULL,
+    LO_CUSTKEY              INTEGER NOT NULL,
+    LO_PARTKEY              INTEGER NOT NULL,
+    LO_SUPPKEY              INTEGER NOT NULL,
+    LO_ORDERDATE            DATE NOT NULL,
+    LO_ORDERPRIORITY        TEXT NOT NULL,
+    LO_SHIPPRIORITY         INTEGER NOT NULL,
+    LO_QUANTITY             INTEGER NOT NULL,
+    LO_EXTENDEDPRICE        INTEGER NOT NULL,
+    LO_ORDTOTALPRICE        INTEGER NOT NULL,
+    LO_DISCOUNT             INTEGER NOT NULL,
+    LO_REVENUE              INTEGER NOT NULL,
+    LO_SUPPLYCOST           INTEGER NOT NULL,
+    LO_TAX                  INTEGER NOT NULL,
+    LO_COMMITDATE           DATE NOT NULL,
+    LO_SHIPMODE             TEXT NOT NULL
+);
+CREATE INDEX lineorder_index ON lineorder(LO_ORDERDATE, LO_ORDERKEY);
+ 
+CREATE TABLE supplier (
+        S_SUPPKEY       INTEGER NOT NULL,
+        S_NAME          TEXT NOT NULL,
+        S_ADDRESS       TEXT NOT NULL,
+        S_CITY          TEXT NOT NULL,
+        S_NATION        TEXT NOT NULL,
+        S_REGION        TEXT NOT NULL,
+        S_PHONE         TEXT NOT NULL
+);
+CREATE INDEX supplier_index ON supplier(S_NATION, S_REGION, S_CITY);
+ 
+CREATE TABLE part (
+        P_PARTKEY       INTEGER NOT NULL,
+        P_NAME          TEXT NOT NULL,
+        P_MFGR          TEXT NOT NULL,
+        P_CATEGORY      TEXT NOT NULL,
+        P_BRAND         TEXT NOT NULL,
+        P_COLOR         TEXT NOT NULL,
+        P_TYPE          TEXT NOT NULL,
+        P_SIZE          INTEGER NOT NULL,
+        P_CONTAINER     TEXT NOT NULL
+);
+CREATE INDEX part_index ON part(P_CATEGORY, P_BRAND, P_MFGR);
+ 
+CREATE TABLE lineorder_flat (
+    LO_ORDERKEY             LONG NOT NULL,
+    LO_LINENUMBER           INTEGER NOT NULL,
+    LO_CUSTKEY              INTEGER NOT NULL,
+    LO_PARTKEY              INTEGER NOT NULL,
+    LO_SUPPKEY              INTEGER NOT NULL,
+    LO_ORDERDATE            DATE NOT NULL,
+    LO_ORDERPRIORITY        TEXT NOT NULL,
+    LO_SHIPPRIORITY         INTEGER NOT NULL,
+    LO_QUANTITY             INTEGER NOT NULL,
+    LO_EXTENDEDPRICE        INTEGER NOT NULL,
+    LO_ORDTOTALPRICE        INTEGER NOT NULL,
+    LO_DISCOUNT             INTEGER NOT NULL,
+    LO_REVENUE              INTEGER NOT NULL,
+    LO_SUPPLYCOST           INTEGER NOT NULL,
+    LO_TAX                  INTEGER NOT NULL,
+    LO_COMMITDATE           DATE NOT NULL,
+    LO_SHIPMODE             TEXT NOT NULL,
+    C_CUSTKEY       INTEGER NOT NULL,
+    C_NAME          TEXT NOT NULL,
+    C_ADDRESS       TEXT NOT NULL,
+    C_CITY          TEXT NOT NULL,
+    C_NATION        TEXT NOT NULL,
+    C_REGION        TEXT NOT NULL,
+    C_PHONE         TEXT NOT NULL,
+    C_MKTSEGMENT    TEXT NOT NULL,
+    S_SUPPKEY       INTEGER NOT NULL,
+    S_NAME          TEXT NOT NULL,
+    S_ADDRESS       TEXT NOT NULL,
+    S_CITY          TEXT NOT NULL,
+    S_NATION        TEXT NOT NULL,
+    S_REGION        TEXT NOT NULL,
+    S_PHONE         TEXT NOT NULL,
+    P_PARTKEY       INTEGER NOT NULL,
+    P_NAME          TEXT NOT NULL,
+    P_MFGR          TEXT NOT NULL,
+    P_CATEGORY      TEXT NOT NULL,
+    P_BRAND         TEXT NOT NULL,
+    P_COLOR         TEXT NOT NULL,
+    P_TYPE          TEXT NOT NULL,
+    P_SIZE          INTEGER NOT NULL,
+    P_CONTAINER     TEXT NOT NULL
+);
+CREATE INDEX lineorder_flat_index ON lineorder_flat(LO_ORDERDATE, LO_ORDERKEY);
